@@ -1,0 +1,10 @@
+GITHUB LINK:
+https://github.com/muratovic/cloud-developer/tree/master/course-02
+
+ELASTIC BEANSTALK DEPLOYMENT URL:
+http://image-filter-starter-code-dev2.eu-west-3.elasticbeanstalk.com/
+
+with GET request by filteredimage query param:
+http://image-filter-starter-code-dev2.eu-west-3.elasticbeanstalk.com/filteredimage?image_url=http://www.muratozturk.web.tr/img/static/workspace.png
+
+
