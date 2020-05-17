@@ -8,19 +8,19 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
 
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'us-east-1'}
+  region: ${opt:region, 'eu-west-3'}
 
   environment:
     GROUPS_TABLE: Groups-${self:provider.stage}
     IMAGES_TABLE: Images-${self:provider.stage}
     IMAGE_ID_INDEX: ImageIdIndex
     CONNECTIONS_TABLE: Connections-${self:provider.stage}
-    IMAGES_S3_BUCKET: serverless-udagram-images-${self:provider.stage}
+    IMAGES_S3_BUCKET: serverless-udagram-images-8484839-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    THUMBNAILS_S3_BUCKET: serverless-udagram-thumbnail-${self:provider.stage}
+    THUMBNAILS_S3_BUCKET: serverless-udagram-thumbnail-8484839-${self:provider.stage}
 
   iamRoleStatements:
     - Effect: Allow
@@ -46,7 +46,7 @@ provider:
     - Effect: Allow
       Action:
         - s3:PutObject
-      Resource: "arn:aws:s3:::${self:provider.environment.THUMBNAILS_S3_BUCKET}/*"
+      Resource: arn:aws:s3:::${self:provider.environment.THUMBNAILS_S3_BUCKET}/*
     - Effect: Allow
       Action:
         - dynamodb:Scan
@@ -135,6 +135,16 @@ functions:
 
   ResizeImage:
     handler: src/lambda/s3/resizeImage.handler
+    events:
+      - sns:
+          arn:
+            Fn::Join:
+              - ':'
+              - - arn:aws:sns
+                - Ref: AWS::Region
+                - Ref: AWS::AccountId
+                - ${self:custom.topicName}
+          topicName: ${self:custom.topicName}
 
   ConnectHandler:
     handler: src/lambda/websocket/connect.handler
