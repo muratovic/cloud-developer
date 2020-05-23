@@ -5,25 +5,25 @@ import 'source-map-support/register'
 import { verify } from 'jsonwebtoken'
 import { JwtToken } from '../../auth/JwtToken'
 
-const cert = `-----BEGIN CERTIFICATE-----
-MIIDCTCCAfGgAwIBAgIJLAmkxs4kIPHJMA0GCSqGSIb3DQEBCwUAMCIxIDAeBgNV
-BAMTF3Rlc3QtZW5kcG9pbnQuYXV0aDAuY29tMB4XDTE5MDQwNzE1MjMzM1oXDTMy
-MTIxNDE1MjMzM1owIjEgMB4GA1UEAxMXdGVzdC1lbmRwb2ludC5hdXRoMC5jb20w
-ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC6GcM+A7Hp8bvFNwKASxlh
-xcwA0EuFWc8w9Eis7AS392sjd2ZV3TekeMpoNwozfJncES/fLdtPN8uFOOYykKTF
-K1M1LpfqLvRFr8x3jM7UxpAzqXz1NvXp88VGtk2FwJ88Y5103pCayCGHGKlZx3nq
-3u7JvwhoHl5ZpnN0jrsdqSdBjE5pOTbseCkygk8TFUyJ4pWG//8oamHwGSEOk9z6
-n36bzwScB8JQirhPzst40WmXqnF3SnSwFJK3wpckyO0vZbuqNGBSJKQgJYh9NECu
-fi2stC5UF9OIjBC4SGcmDmaQuTCjb4GFfrkSARmbSjSJqYNqrSIemGLeCa5MJNuB
-AgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFIJyYhlzJfj6a4J5
-Mahj6zKGrjMYMA4GA1UdDwEB/wQEAwIChDANBgkqhkiG9w0BAQsFAAOCAQEALrMd
-IlGLtrh71nHa57smyj/NSZGeyRuaoagj3WLCkoAh8OnAgGNSC1OV0tIt8ZMOXy7D
-aAamQQbfHSZ9qX1N2DhaU9+lpgHls6FEO8gEW2b1KKfJ9/YfSfHaRGNvpSqEuxMo
-pYQnaBdWtTly0yP9JBoMl9MRbNyffUdLXWlHtq2YLo8oWsLXI71cZf6ZB+sT79AA
-AiZPr1VtbQZOhrsS6iDxAR6kXwZben1qbTEBgGURU1t3frrNQ0RzxArjWf5qIFk+
-T6JsUVfTqyG1gFfoQ4EAy2NGppNTI8WAefHna5O6+Hz8WHrciCqCYbvBWPvSDGwl
-N1FDtwZVhZFsYQkSgw==
------END CERTIFICATE-----`
+const cert = '-----BEGIN CERTIFICATE-----\n' +
+    'MIIDBzCCAe+gAwIBAgIJQP4ngmEWaAlAMA0GCSqGSIb3DQEBCwUAMCExHzAdBgNV\n' +
+    'BAMTFmRldi15enk2aXduOS5hdXRoMC5jb20wHhcNMjAwNTE5MTUwNDAzWhcNMzQw\n' +
+    'MTI2MTUwNDAzWjAhMR8wHQYDVQQDExZkZXYteXp5Nml3bjkuYXV0aDAuY29tMIIB\n' +
+    'IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzzuxJni7eX6XiRJlNcQIuB0V\n' +
+    '948xia0rPcaLYhQPO5m3c0AXcWPa/FuoLkwI6iO2LkwCohnPr1ch5+FZTUZ5jEX0\n' +
+    '4NInS5vGAjABLgiXn+nyKhlVgEEmsQhhqBe95Tbz7bVxkp72FVjCHhTXAW9YCi3Z\n' +
+    '0tlEL4k/QCZXuc739GLWdM9SogXwO829ZSOmh6kEJffZYG2+b75LGWJi4+ns2c2+\n' +
+    'tNz1hYh1uq23OZF7Is0Wn7E0LM53AJ8CE1+hrGnSsf1cyMyfVMYu3Zdcz+N0G3Dc\n' +
+    'Dbw6OvjJc7o0WSId7sBamunFh98sev//xgLRnflNeaNu+Zd+NGuHy3bvpleLXQID\n' +
+    'AQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSUSTT+c+RiSGMq/kS/\n' +
+    'NsKNkciVhzAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAAirekOP\n' +
+    'eUweOioqXLMeEOvK83BiNWtpJdSHaTUoPHHPDp/aZPMieNKHfq04+iaIEW+LFu7G\n' +
+    '9CWJhH+Fi6KoXUCRciiLQwvg2Mhe/1j36yZU37Ppk8VtICQoo3k3e9nd7hWeuafM\n' +
+    'L+JJ0M21m2tSyxodPnKGwIu+VYlrjmGV+uxP/SsDaxiA3MLvXNhcCaJl2YPz5hDg\n' +
+    '/i9r4k6LCZjzHP12uLxYIkTZ0G575+4TdJv6+28imXx8rSfuv1YNvW3eoXuK1Gd2\n' +
+    'aY8U8+R4anewmYjhIxDS+29QDLqzdGWNRagrOKn6jKsCC3+8a7fQjxdGiikYkEaE\n' +
+    'YAU/IPXTcGO8FwY=\n' +
+    '-----END CERTIFICATE-----';
 
 export const handler = async (event: CustomAuthorizerEvent): Promise<CustomAuthorizerResult> => {
   try {

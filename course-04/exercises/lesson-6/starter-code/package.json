@@ -7,8 +7,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "aws-serverless-express": "^3.3.8",
     "aws-xray-sdk": "^2.3.3",
     "elasticsearch": "^15.5.0",
+    "express": "^4.17.1",
     "http-aws-es": "^6.0.0",
     "jimp": "^0.6.4",
     "jsonwebtoken": "^8.5.1",
@@ -29,6 +31,7 @@
     "serverless-iam-roles-per-function": "^1.0.4",
     "serverless-offline": "^4.10.6",
     "serverless-plugin-canary-deployments": "^0.4.7",
+    "serverless-plugin-tracing": "^2.0.0",
     "serverless-reqvalidator-plugin": "^1.0.3",
     "serverless-webpack": "^5.3.1",
     "ts-jest": "^24.0.2",
